@@ -15,7 +15,10 @@ abstract class GDALReader(dataset: Dataset, dataType: GDALDataType) {
     val arr = Array.ofDim[java.lang.Double](1)
     dataset.GetRasterBand(1).GetNoDataValue(arr)
 
-    Option(arr(0))
+    arr.head match {
+      case null => None
+      case value => Some(value.doubleValue)
+    }
   }
 
   def read(gridBounds: GridBounds): MultibandTile
