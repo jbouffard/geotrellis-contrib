@@ -94,12 +94,12 @@ class RasterSourceRDDSpec extends FunSpec with TestEnvironment {
   }
 
   describe("reading in GeoTiffs as RDDs using GDALRasterSource") {
-    //val uri = s"${new File("").getAbsolutePath()}/src/test/resources/img/aspect-tiled.tif"
-    val uri = "/tmp/alaska.tif"
+    val uri = s"${new File("").getAbsolutePath()}/src/test/resources/img/aspect-tiled.tif"
+    //val uri = "/tmp/alaska.tif"
     val rasterSource = GDALRasterSource(uri)
 
     it("should have the right number of tiles") {
-      val warpRasterSource = WarpGDALRasterSource(uri, targetCRS, GDALNearestNeighbor)
+      val warpRasterSource = WarpGDALRasterSource(uri, targetCRS)
       val rdd = RasterSourceRDD(warpRasterSource, layout)
 
       val expectedKeys =
@@ -118,7 +118,7 @@ class RasterSourceRDDSpec extends FunSpec with TestEnvironment {
     }
 
     it("should read in the tiles as squares") {
-      val reprojectedRasterSource = WarpGDALRasterSource(uri, targetCRS, GDALNearestNeighbor)
+      val reprojectedRasterSource = WarpGDALRasterSource(uri, targetCRS)
       val rdd = RasterSourceRDD(reprojectedRasterSource, layout)
 
       val values = rdd.values.collect()
