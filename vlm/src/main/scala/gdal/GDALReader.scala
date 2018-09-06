@@ -11,7 +11,7 @@ import spire.syntax.cfor._
 abstract class GDALReader(dataset: Dataset, dataType: GDALDataType) {
   protected val bandCount = dataset.getRasterCount()
 
-  protected lazy val noDataValue: Option[Double] = {
+  protected val noDataValue: Option[Double] = {
     val arr = Array.ofDim[java.lang.Double](1)
     dataset.GetRasterBand(1).GetNoDataValue(arr)
 
