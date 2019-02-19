@@ -41,6 +41,8 @@ class LayoutTileSource(val source: RasterSource, val layout: LayoutDefinition) e
       rowMin = (row * layout.tileRows - sourceRowOffset).toInt,
       colMax = ((col+1) * layout.tileCols - 1 - sourceColOffset).toInt,
       rowMax = ((row+1) * layout.tileRows - 1 - sourceRowOffset).toInt)
+
+    println(s"\nkey: $key gridBounds: ${sourcePixelBounds}")
     RasterRegion(source, sourcePixelBounds)
   }
 
